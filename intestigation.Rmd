@@ -26,11 +26,18 @@ library(tidyverse)
 ```{r load-data}
 # load your data 
 race_results <- read_csv("data/formula_e_race_results.csv") 
-view(race_results)
+race_results %>%
+  is.na() %>%
+  colSums() # found all na values, these occur in laps and time_retired
 
+race_results <- race_results %>%
+  filter(!is.na(laps)) # removed oliver turvey from the dataset because he withdrew from the 2018 nyc race
 
+race_results <- race_results %>%
+  arrange(race_date, rank_num) # sort the results by data and driver ranking
 
-
+race_results %>%
+  filter(is.na(time_retired)) # display races where time_retired is NA
 
 
 ```
