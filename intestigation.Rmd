@@ -100,3 +100,25 @@ ggplot(class_n,aes(x = class, y = n, fill = class)) +
   )
 ```
 
+```{r}
+#Which team group has ranked first the most?
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count(team_group) %>%
+  arrange(desc(n))
+#Nissan-Renault
+
+#How many races does the data set include? (With the assumption every race has a winner.)
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count()
+#71 Which would align with the frequency tables above.
+
+
+#How often does pole position covert into a win?
+race_results %>%
+  filter(points >= 28) %>% 
+  count()
+#In 26 races pole position has converted to a win.
+```
+
