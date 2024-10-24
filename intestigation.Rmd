@@ -43,3 +43,60 @@ race_results %>%
 ```
 
 
+
+```{r}
+points_breakdown <- race_results %>% 
+  select(,driver,points,pts_rank,pts_pole,pts_bonus)
+
+points_breakdown <- points_breakdown %>% 
+  group_by(driver) %>% 
+  summarize(points = sum(points),
+            pts_rank = sum(pts_rank),
+            pts_pole = sum(pts_pole),
+            pts_bonus = sum(pts_bonus)
+            ) %>% 
+  arrange(desc(points))    #finds total points scored by each driver and breaks down the types of points too
+
+summary(points_breakdown) #Mean total points is 104, normal points 99.6, pole points 2.958 and bonus points is 1.458
+
+points_breakdown <- points_breakdown %>% 
+ mutate(
+   class = case_when(
+    points > 700 ~ "A",
+    points > 400 & points <= 700 ~ "B",
+    points > 250 & points <= 400 ~ "C",
+    points > 100 & points <= 250 ~ "D",
+    points > 25 & points <= 100 ~ "E",
+    points > 10 & points <= 25 ~ "F",
+    points > 0 & points <= 10 ~ "G",
+    points == 0 ~ "H"
+   ))  #implements classes, it was the easiest way I could think of to split the 72 different drivers into groups based on the points they've scored over the seasons.
+  
+class_n <- points_breakdown %>% 
+  count(class)
+
+class_legend <- c(
+  "A: 700 + points",
+  "B: 401 - 700 points",
+  "C: 251 - 400 points",
+  "D: 101 - 250 points",
+  "E: 26 - 100 points",
+  "F: 11 - 25 points",
+  "G: 1 - 10 points",
+  "H: 0 points"
+) #is displayed as the legend at the side of the graph
+  
+ggplot(class_n,aes(x = class, y = n, fill = class)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual( 
+    values = c("A" = "gold", "B" = "grey", "C" = "orange", "D" = "red",
+               "E" = "green", "F" = "blue", "G" = "purple", "H" = "black"), #Colours can be changed was just the first ones that came to mind.
+    labels = class_legend)+
+   labs(
+    title = "Number of Drivers per Class",
+    x = "Class",
+    y = "Number of Drivers",
+    fill = "Driver Class (Points scored over all 7 seasons)"
+  )
+```
+
