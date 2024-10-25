@@ -142,4 +142,16 @@ race_results %>%
 #In 26 races pole position has converted to a win.
 ```
 
+```{r}
+
+race_results %>%
+  ggplot(aes(y = fct_rev(month(race_date, label = TRUE, abbr=FALSE)))) +
+  geom_bar() +
+  labs(
+    title = "Number of races taking place each month", 
+    y = "Month", 
+    x = "Number of races",
+  )
+
+```
 
