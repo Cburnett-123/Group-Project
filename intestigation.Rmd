@@ -51,7 +51,7 @@ race_results <- race_results %>%
 race_results$loc_series <- replace_na(race_results$loc_series, "1")
 #set NAs created by above command to 1 (as only 1 race series in the year)
 
-race_results$time_retired[423:440]
+race_results$time_retired <- replace(race_results$time_retired, is.na(race_results$time_retired), c("47:40.840", "+2.457", "+7.195", "+11.586", "+13.771", "+18.233", "+21.710", "+28.011", "+33.699", "+33.863", "+37.092", "+40.683", "+42.034", "+49.026", "+50.433", "+75.452", "+1 Lap", "+3 Laps", "Electrical", "Battery"))
 
 ```
 
