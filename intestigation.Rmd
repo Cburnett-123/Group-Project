@@ -101,6 +101,26 @@ ggplot(class_n,aes(x = class, y = n, fill = class)) +
 ```
 
 ```{r}
+#How many races has each driver been in? Which driver has been in the most races in the data set?
+race_results %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Lucas di Grassi and Sam Bird
+
+#Which driver has ranked first the most?
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Sébastien Buemi
+
+#Which driver has come last the most?
+race_results %>%
+  filter(pts_rank == 1) %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Stéphane Sarrazin
+
 #Which team group has ranked first the most?
 race_results %>%
   filter(pts_rank == 25) %>%
@@ -121,4 +141,5 @@ race_results %>%
   count()
 #In 26 races pole position has converted to a win.
 ```
+
 
