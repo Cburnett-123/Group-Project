@@ -51,10 +51,7 @@ race_results <- race_results %>%
 race_results$loc_series <- replace_na(race_results$loc_series, "1")
 #set NAs created by above command to 1 (as only 1 race series in the year)
 
-race_results$time_retired <- replace(race_results$time_retired, is.na(race_results$time_retired), c("47:40.840", "+2.457", "+7.195", "+11.586", "+13.771", "+18.233", "+21.710", "+28.011", "+33.699", "+33.863", "+37.092", "+40.683", "+42.034", "+49.026", "+50.433", "+75.452", "+1 Lap", "+3 Laps", "Electrical", "Battery"))
-
-view(race_results)
- # Replace time retired NA's to actual vlaues
+race_results$time_retired[423:440]
 
 ```
 
@@ -174,3 +171,62 @@ race_results %>%
 
 ```
 
+```{r}
+race_results %>% arrange(team_group) %>% view() #temporary arranging to make finding all the teams easier
+
+Audi_results <- race_results %>% filter(team_group == "Audi") #tabulating Audi data
+
+BMW_Andretti_results <- race_results %>% filter(team_group == "BMW-Andretti") #tabulating BMW-Andretti data
+
+Dragon_results <- race_results %>% filter(team_group == "Dragon") #tabulating Dragon data
+
+Jaguar_results <- race_results %>% filter(team_group == "Jaguar") #tabulating Jaguar data
+
+Mahindra_results <- race_results %>% filter(team_group == "Mahindra") #tabulating Mahindra data
+
+Mercedes_results <- race_results %>% filter(team_group == "Mercedes") #tabulating Mercedes data
+
+NIO_NextEV_results <- race_results %>% filter(team_group == "NIO-NextEV") #tabulating NIO-NextEV data
+
+Nissan_Renault_results <- race_results %>% filter(team_group == "Nissan-Renault") #tabulating Nissan-Renault data
+
+Porsche_results <- race_results %>% filter(team_group == "Porsche") #tabulating Porsche data
+
+Techeetah_results <- race_results %>% filter(team_group == "Techeetah") #tabulating Techeetah data
+
+Trulli_results <- race_results %>% filter(team_group == "Trulli") #tabulating Trulli data
+
+Venturi_results <- race_results %>% filter(team_group == "Venturi") #tabulating Venturi data
+
+Virgin_results <- race_results %>% filter(team_group == "Virgin") #tabulating Virgin data
+
+race_dates <- race_results %>% select(race_date)
+
+race_dates <- unique(race_dates)
+
+Audi_points_by_year <- Audi_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+BMW_Andretti_points_by_year <- BMW_Andretti_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Dragon_points_by_year <- Dragon_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Jaguar_points_by_year <- Jaguar_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Mahindra_points_by_year <- Mahindra_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Mercedes_points_by_year <- Mercedes_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+NIO_NextEV_points_by_year <- NIO_NextEV_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Nissan_Renault_points_by_year <- Nissan_Renault_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Porsche_points_by_year <- Porsche_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Techeetah_points_by_year <- Techeetah_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Trulli_points_by_year <- Trulli_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Venturi_points_by_year <- Venturi_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+Virgin_points_by_year <- Virgin_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+```
