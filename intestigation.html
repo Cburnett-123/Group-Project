@@ -426,13 +426,10 @@ race_results %&gt;%
 ## # ℹ 8 more variables: rank_num &lt;dbl&gt;, grid &lt;chr&gt;, laps &lt;dbl&gt;,
 ## #   time_retired &lt;chr&gt;, pts_rank &lt;dbl&gt;, pts_pole &lt;dbl&gt;, pts_bonus &lt;dbl&gt;,
 ## #   points &lt;dbl&gt;</code></pre>
-<pre class="r"><code>race_results$race_name[race_results$season == 4 &amp; race_results$race_num == 10] &lt;- &quot;2018 Zurich&quot;
-# there was an issue due to the umlaut on the u of zurich so reassigned these values
-
-race_results &lt;- race_results %&gt;%
-  separate(race_name, into = c(&quot;year&quot;, &quot;race_location&quot;), sep = 4, fill = &quot;right&quot;)
-# this might be worth removing but isolates the race location which will be useful
-# might want to remove the race year/isolate series as well</code></pre>
+<pre class="r"><code>race_results &lt;- race_results %&gt;%
+  separate(race_name, into = c(&quot;year&quot;, &quot;race_location&quot;), sep = 4, fill = &quot;right&quot;) %&gt;%
+  select(-year)
+# remove the race year just leaving location</code></pre>
 <pre class="r"><code>points_breakdown &lt;- race_results %&gt;% 
   select(,driver,points,pts_rank,pts_pole,pts_bonus)
 
@@ -610,7 +607,8 @@ race_results %&gt;%
 ##   &lt;int&gt;
 ## 1    26</code></pre>
 <pre class="r"><code>#In 26 races pole position has converted to a win.</code></pre>
-<pre class="r"><code>race_results %&gt;%
+<pre class="r"><code>#how many races have taken place each month over the course of all the seasons?
+race_results %&gt;%
   ggplot(aes(y = fct_rev(month(race_date, label = TRUE, abbr=FALSE)))) +
   geom_bar() +
   labs(
