@@ -156,6 +156,7 @@ race_results %>%
 ```{r}
 #how many races have taken place each month over the course of all the seasons?
 race_results %>%
+  filter(pts_rank == 25) %>%
   ggplot(aes(y = fct_rev(month(race_date, label = TRUE, abbr=FALSE)))) +
   geom_bar(aes(fill = month(race_date) != 7)) +
   labs(
