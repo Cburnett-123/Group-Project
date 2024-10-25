@@ -39,6 +39,17 @@ race_results <- race_results %>%
 race_results %>%
   filter(is.na(time_retired)) # display races where time_retired is NA
 
+race_results <- race_results %>%
+  separate(race_name, into = c("year", "race_location"), sep = 4, fill = "right") %>%
+  select(-year)
+# remove the race year just leaving location
+
+race_results <- race_results %>%
+  separate(race_location, into = c("race_loc", "loc_series"), sep = "race", fill = "right")
+# added series for when multiple races in same location in a year
+
+race_results$loc_series <- replace_na(race_results$loc_series, "1")
+#set NAs created by above command to 1 (as only 1 race series in the year)
 
 ```
 
@@ -98,5 +109,63 @@ ggplot(class_n,aes(x = class, y = n, fill = class)) +
     y = "Number of Drivers",
     fill = "Driver Class (Points scored over all 7 seasons)"
   )
+```
+
+```{r}
+#How many races has each driver been in? Which driver has been in the most races in the data set?
+race_results %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Lucas di Grassi and Sam Bird
+
+#Which driver has ranked first the most?
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Sébastien Buemi
+
+#Which driver has come last the most?
+race_results %>%
+  filter(pts_rank == 1) %>%
+  count(driver) %>%
+  arrange(desc(n))
+#Stéphane Sarrazin
+
+#Which team group has ranked first the most?
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count(team_group) %>%
+  arrange(desc(n))
+#Nissan-Renault
+
+#How many races does the data set include? (With the assumption every race has a winner.)
+race_results %>%
+  filter(pts_rank == 25) %>%
+  count()
+#71 Which would align with the frequency tables above.
+
+
+#How often does pole position covert into a win?
+race_results %>%
+  filter(points >= 28) %>% 
+  count()
+#In 26 races pole position has converted to a win.
+```
+
+```{r}
+#how many races have taken place each month over the course of all the seasons?
+race_results %>%
+  filter(pts_rank == 25) %>%
+  ggplot(aes(y = fct_rev(month(race_date, label = TRUE, abbr=FALSE)))) +
+  geom_bar(aes(fill = month(race_date) != 7)) +
+  labs(
+    title = "Number of races taking place each month", 
+    y = "Month", 
+    x = "Number of races",
+  ) +
+  scale_fill_manual(values = c("red", "grey"), guide= "none")
+
+
 ```
 
