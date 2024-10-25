@@ -42,6 +42,11 @@ race_results %>%
 race_results$race_name[race_results$season == 4 & race_results$race_num == 10] <- "2018 Zurich"
 # there was an issue due to the umlaut on the u of zurich so reassigned these values
 
+race_results <- race_results %>%
+  separate(race_name, into = c("year", "race_location"), sep = 4, fill = "right")
+# this might be worth removing but isolates the race location which will be useful
+# might want to remove the race year/isolate series as well
+
 
 ```
 
