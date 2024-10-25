@@ -426,6 +426,8 @@ race_results %&gt;%
 ## # ℹ 8 more variables: rank_num &lt;dbl&gt;, grid &lt;chr&gt;, laps &lt;dbl&gt;,
 ## #   time_retired &lt;chr&gt;, pts_rank &lt;dbl&gt;, pts_pole &lt;dbl&gt;, pts_bonus &lt;dbl&gt;,
 ## #   points &lt;dbl&gt;</code></pre>
+<pre class="r"><code>race_results$race_name[race_results$season == 4 &amp; race_results$race_num == 10] &lt;- &quot;2018 Zurich&quot;
+# there was an issue due to the umlaut on the u of zurich so reassigned these values</code></pre>
 <pre class="r"><code>points_breakdown &lt;- race_results %&gt;% 
   select(,driver,points,pts_rank,pts_pole,pts_bonus)
 

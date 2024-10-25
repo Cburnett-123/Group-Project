@@ -39,6 +39,9 @@ race_results <- race_results %>%
 race_results %>%
   filter(is.na(time_retired)) # display races where time_retired is NA
 
+race_results$race_name[race_results$season == 4 & race_results$race_num == 10] <- "2018 Zurich"
+# there was an issue due to the umlaut on the u of zurich so reassigned these values
+
 
 ```
 
@@ -152,6 +155,7 @@ race_results %>%
     y = "Month", 
     x = "Number of races",
   )
+
 
 ```
 
