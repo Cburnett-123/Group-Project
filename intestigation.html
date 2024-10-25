@@ -436,7 +436,10 @@ race_results &lt;- race_results %&gt;%
 # added series for when multiple races in same location in a year
 
 race_results$loc_series &lt;- replace_na(race_results$loc_series, &quot;1&quot;)
-#set NAs created by above command to 1 (as only 1 race series in the year)</code></pre>
+#set NAs created by above command to 1 (as only 1 race series in the year)
+
+race_results$time_retired[423:440]</code></pre>
+<pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
 <pre class="r"><code>points_breakdown &lt;- race_results %&gt;% 
   select(,driver,points,pts_rank,pts_pole,pts_bonus)
 

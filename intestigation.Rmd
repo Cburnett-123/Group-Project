@@ -51,6 +51,8 @@ race_results <- race_results %>%
 race_results$loc_series <- replace_na(race_results$loc_series, "1")
 #set NAs created by above command to 1 (as only 1 race series in the year)
 
+race_results$time_retired[423:440]
+
 ```
 
 
