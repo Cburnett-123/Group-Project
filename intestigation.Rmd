@@ -230,3 +230,62 @@ Venturi_points_by_year <- Venturi_results %>% group_by(race_date) %>% summarise(
 
 Virgin_points_by_year <- Virgin_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
 ```
+
+```{r}
+highest_performing <- filter(race_results,
+  driver == "Lucas di Grassi"| 
+    driver == "Sam Bird" | 
+    driver =="Sébastien Buemi")
+
+ggplot(data = highest_performing, 
+       mapping = aes(
+         x = race_date,
+         y = pts_rank,
+         colour = driver
+       )) +
+  geom_line() +
+  theme(legend.position = "bottom") +
+  labs(
+    title = "Drivers Performance Over Time",
+    subtitle = "Showing the three drivers who have been in the most races.",
+    x = "Time",
+    y = "Position Finished",
+    colour = ""
+  )
+
+ggplot(data = highest_performing, 
+       mapping = aes(
+         x = race_date,
+         y = pts_rank,
+       )) +
+  geom_line() +
+  labs(
+    title = "Drivers Performance Over Time",
+    subtitle = "Showing the three drivers who have been in the most races.",
+    x = "Time",
+    y = "Position Finished"
+  ) +
+  facet_wrap(~ driver,
+               ncol = 1)
+
+ggplot(data = highest_performing, 
+       mapping = aes(
+         x = race_date,
+         y = pts_rank,
+       )) +
+  geom_point() +
+  labs(
+    title = "Drivers Performance Over Time",
+    subtitle = "Showing the three drivers who have been in the most races.",
+    x = "Time",
+    y = "Position Finished"
+  ) +
+  facet_wrap(~ driver,
+               ncol = 1)
+
+#We don't need all of these (they all show the same thing) but I don't know what is the best way to show this. There doesn't appear to be an obvious relationship.
+```
+
+
+
+
