@@ -229,6 +229,62 @@ Trulli_points_by_year <- Trulli_results %>% group_by(race_date) %>% summarise(po
 Venturi_points_by_year <- Venturi_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
 
 Virgin_points_by_year <- Virgin_results %>% group_by(race_date) %>% summarise(points = sum(points)) 
+
+
+total <- merge(Audi_points_by_year, BMW_Andretti_points_by_year,by="race_date")
+
+colnames(total)[2] <- "Audi points"
+
+colnames(total)[3] <- "BMW Andretti points"
+
+total <- merge(total, Dragon_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[4] <- "Dragon points"
+
+total <- merge(total, Jaguar_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[5] <- "Jaguar points"
+
+total <- merge(total, Mahindra_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[6] <- "Mahindra points"
+
+total <- merge(total, Mercedes_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[7] <- "Mercedes points"
+
+total <- merge(total, NIO_NextEV_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[8] <- "NIO NextEV points"
+
+total <- merge(total, Nissan_Renault_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[9] <- "Nissan Renault points"
+
+total <- merge(total, Porsche_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[10] <- "Porsche points"
+
+total <- merge(total, Techeetah_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[11] <- "Techeetah points"
+
+total <- merge(total, Techeetah_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[12] <- "Trulli points"
+
+total <- merge(total, Venturi_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[13] <- "Venturi points"
+
+total <- merge(total, Virgin_points_by_year, by="race_date", all.x=TRUE)
+
+colnames(total)[14] <- "Virgin points"
+
+colnames(total)[1] <- "Race date"
+
+total[is.na(total)] <- 0
+view(total)
 ```
 
 ```{r}
