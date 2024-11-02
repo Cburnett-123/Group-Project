@@ -111,6 +111,39 @@ ggplot(class_n,aes(x = class, y = n, fill = class)) +
     y = "Number of Drivers",
     fill = "Driver Class (Points scored over all 7 seasons)"
   )
+
+#creating data set with just the 10 drivers who have all scored over 250 career points
+points_breakdown_top10 <- points_breakdown %>% 
+  head(10)
+
+points_breakdown_top10 <- points_breakdown_top10 %>% 
+  rename(pts_total = points)
+
+#pivoting longer to creating the point type variable which is how the colours are distributed in the graphs
+top10_long <- points_breakdown_top10 %>% 
+  pivot_longer(cols=c(pts_rank,pts_pole,pts_bonus),
+               names_to = "point_type",
+               values_to = "points"
+               )
+#bar graph with all points collected into one column
+top10_long %>% 
+ggplot(aes(x = points, y = reorder(driver, pts_total), fill = point_type))+
+  geom_bar(stat = "identity")+
+  labs(title = "Points Breakdown for Top 10 Drivers",
+    x = "Points",
+    y = "Driver",
+    fill = "Type of Points"
+)
+
+#bar graph with types of points in separate columns
+top10_long %>% 
+ggplot(aes(x = points, y = reorder(driver, pts_total), fill = point_type))+
+  geom_bar(stat = "identity", position = "dodge")+
+  labs(title = "Points Breakdown for Top 10 Drivers",
+    x = "Points",
+    y = "Driver",
+    fill = "Type of Points"
+) 
 ```
 
 ```{r}
