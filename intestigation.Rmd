@@ -329,7 +329,7 @@ highest_performing <- filter(race_results,
 ggplot(data = highest_performing, 
        mapping = aes(
          x = race_date,
-         y = pts_rank,
+         y = rank_num,
          colour = driver
        )) +
   geom_line() +
@@ -345,7 +345,7 @@ ggplot(data = highest_performing,
 ggplot(data = highest_performing, 
        mapping = aes(
          x = race_date,
-         y = pts_rank,
+         y = rank_num,
        )) +
   geom_line() +
   labs(
@@ -360,7 +360,7 @@ ggplot(data = highest_performing,
 ggplot(data = highest_performing, 
        mapping = aes(
          x = race_date,
-         y = pts_rank,
+         y = rank_num,
        )) +
   geom_point() +
   labs(
